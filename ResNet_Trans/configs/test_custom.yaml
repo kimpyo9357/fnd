@@ -1,0 +1,129 @@
+# 실험 설정 - 개선된 ResNet-Transformer
+EXPR_NAME: "ResNet-Transformer-Improved_focal"
+RANDOM_SEED: 42  # 재현성을 위한 랜덤 시드 (42로 고정하여 동일한 결과 보장)
+DRY_RUN: false
+NOTE: "ResNet18 + Transformer Encoder 모델 (개선된 하이퍼파라미터)"
+
+# 학습 재시작 설정
+RESUME:
+  ENABLED: false              
+  CHECKPOINT_PATH: "./checkpoints/ResNet-Transformer-Improved/best_model.pth"         
+  WANDB_RUN_ID: ""           
+  AUTO_RESUME: true          
+
+# CUDA 설정
+CUDA:
+  VISIBLE_DEVICES: "1"
+
+# 데이터셋 설정
+DATASET: "custom"
+
+IMG_PATH: "dataset/frames"
+ANNO_PATH: "dataset"
+
+NUM_CLASSES: 6
+
+# 모델 설정 (개선된 구조)
+MODEL:
+  NAME: "resnet_transformer_improved"
+  USE_SYNC_BN: true
+  BACKBONE:
+    NAME: "resnet18"
+    PRETRAINED: true
+    PRETRAINED_DIR: "weights"
+  TRANSFORMER:
+    NUM_LAYERS: 3                    # 2 -> 3 (더 깊은 학습)
+    NUM_HEADS: 8                     
+    DIM_FEEDFORWARD: 2048            # 1024 -> 2048 (더 큰 용량)
+    DROPOUT: 0.15                    # 0.1 -> 0.15 (더 강한 정규화)
+  CLASSIFIER:
+    HIDDEN_SIZE: 512                 # 256 -> 512 (더 큰 용량)
+    DROPOUT: 0.3                     # 0.5 -> 0.3 (조정된 정규화)
+  # 새로운 설정들
+  SEQUENCE:
+    USE_GLOBAL_POOLING: true         # 마지막 토큰 대신 글로벌 풀링 사용
+    POOLING_TYPE: "attention"        # "last", "mean", "max", "attention"
+    FRAME_SAMPLING: "uniform"        # 프레임 샘플링 전략
+    MAX_FRAMES: 60                  # 1800 -> 900 (절반으로 축소)
+
+# 학습 설정 (최적화된 하이퍼파라미터)
+TRAIN:
+  BATCH_SIZE: 16                      # 8 -> 16 (GPU 활용도 증가)
+  NUM_EPOCHS: 100
+  LEARNING_RATE: 0.000005              # 96% 달성 당시와 동일한 설정 (더 낮은 학습률로 안정적 학습)
+  NUM_WORKERS: 6                     # 4 -> 6 (데이터 로딩 최적화)
+  PIN_MEMORY: true
+  SAVE_DIR: "checkpoints"
+  
+  # 캐시 시스템 설정 (배치 크기 증가로 인한 조정)
+  CACHE:
+    ENABLED: false           
+    MAX_SIZE: 24                     # 32 -> 24 (배치 크기 증가 고려)
+    INITIAL_RATIO: 0.08              # 0.1 -> 0.08 (메모리 안정성)
+    BACKGROUND_ENABLED: false        
+    CLEANUP_THRESHOLD: 0.8           # 0.85 -> 0.8 (더 빨른 정리)
+    FORCE_RESET_THRESHOLD: 0.85      
+  
+  EARLY_STOPPING:
+    PATIENCE: 15                     # 100 -> 15 (빠른 중단)
+    MIN_DELTA: 0.001                 # 0.0001 -> 0.001 (더 큰 개선 요구)
+  SCHEDULER:
+    FACTOR: 0.5                      # 0.1 -> 0.5 (덜 급격한 감소)
+    PATIENCE: 8                      # 5 -> 8 (더 오래 기다림)
+    MIN_LR: 1e-7                     # 1e-6 -> 1e-7 (더 낮은 최소값)
+  OPTIMIZER:
+    NAME: "adamw"                    # "adam" -> "adamw" (더 나은 정규화)
+    WEIGHT_DECAY: 0.01               # 0 -> 0.01 (가중치 감쇠 추가)
+    REGULARIZE_BN: false
+    REGULARIZE_BIAS: false
+
+# 데이터 증강 설정 (개선된 재현성)
+AUGMENTATION:
+  ENABLED: true
+  RANDOM_FLIP: false
+  COLOR_JITTER:
+    ENABLED: true
+    BRIGHTNESS: 0.2
+    CONTRAST: 0.2
+    SATURATION: 0.2
+    HUE: 0.2
+  
+  # 🎯 재현성을 위한 시간적 증강 설정 개선
+  TEMPORAL_AUGMENTATION:
+    ENABLED: false  # 완전한 재현성을 위해 비활성화 (96% 재현 시도)
+    # ENABLED: true   # 성능 향상을 위해서는 활성화 (약간의 변동성 감수)
+    FRAME_DROP_RATIO: 0.05
+    TEMPORAL_SHIFT: true
+    SPEED_PERTURBATION: 0.05
+
+# 로깅 설정
+LOG_FREQ: 50                         # 100 -> 50 (더 자주 로깅)
+CKPT_FREQ: -1
+
+# 분산 학습 설정
+DISTRIBUTED:
+  NUM_NODES: 1
+  NUM_PROC_PER_NODE: 1
+
+LOAD_FROM: ""
+
+# 새로운 모니터링 설정
+MONITORING:
+  GRADIENT_CLIPPING:
+    ENABLED: true
+    MAX_NORM: 1.0                    # 그라디언트 클리핑
+  LEARNING_RATE_FINDER:
+    ENABLED: false                   # 필요시 활성화
+    START_LR: 1e-8
+    END_LR: 1e-1
+  CLASS_WEIGHTS:                     # 클래스 불균형 대응
+    ENABLED: false                   # 필요시 활성화
+    METHOD: "inverse_frequency"      # "balanced", "inverse_frequency" 
+
+TEST:
+  BATCH_SIZE: 8                      # 8 -> 16 (GPU 활용도 증가)
+  NUM_WORKERS: 6                     # 4 -> 6 (데이터 로딩 최적화)
+  MODEL_PATH: "weights/blink_video_resnet_transformer.pth"
+  # 그나마 2가 높음 Top3 74.51
+  # 0 - Top3 70.59
+  PIN_MEMORY: true

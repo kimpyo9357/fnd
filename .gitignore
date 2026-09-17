@@ -1,0 +1,14 @@
+# Model checkpoints are kept locally and distributed separately.
+/weights/*.pt
+/weights/*.pth
+
+# Generated frames, masks, clips, and local caches.
+/runs/
+**/__pycache__/
+*.py[cod]
+.cache/
+.config/
+.nv/
+
+# Keep the internal flow investigation and source manuscript out of GitHub.
+/flow/*
