@@ -155,9 +155,11 @@ def nose_angle(rows):
     kept = [(name, angle) for name, angle in selected
             if q1 - 1.5 * iqr <= angle <= q3 + 1.5 * iqr]
     raw_mean = sum(value for _, value in kept) / len(kept)
+    deviation = abs(raw_mean - 90.0)
     return {"source_frames": len(rows), "selected_frames": len(selected),
-            "after_iqr": len(kept), "raw_mean_degrees": raw_mean,
-            "deviation_from_90_after_mean": abs(raw_mean - 90),
+            "after_iqr": len(kept), "raw_angle": raw_mean,
+            "nose_deviation": deviation,
+            "raw_mean_degrees": raw_mean, "deviation_from_90_after_mean": deviation,
             "selected": [{"frame": name, "angle_degrees": angle} for name, angle in kept]}
 
 
@@ -443,9 +445,17 @@ def main():
     parser.add_argument("--frames-dir", help="Frame directory matching --landmarks-csv image_name")
     parser.add_argument("--video-id", help="Original video ID when using a CSV")
     parser.add_argument("--output", help="New output directory; defaults to runs/<method>/<input>")
-    parser.add_argument("--gt", help="Optional video GT: EX/E1-E5 for blink, V1-V5 for whisker")
+    parser.add_argument("--gt", help="Optional GT: raw angle in degrees for nose; EX/E1-E5 for blink; V1-V5 for whisker")
     parser.add_argument("--threshold", type=float, default=0.2, help="Whisker angular change in radians")
     args = parser.parse_args()
+    nose_gt_angle = None
+    if args.method == "nose" and args.gt is not None:
+        try:
+            nose_gt_angle = float(args.gt)
+        except ValueError:
+            parser.error("Nose GT must be a raw angle in degrees")
+        if not math.isfinite(nose_gt_angle):
+            parser.error("Nose GT must be a finite raw angle in degrees")
     if args.results_json:
         if args.method == "nose":
             parser.error("Nose uses --landmarks-csv, not --results-json")
@@ -463,8 +473,13 @@ def main():
               "video_id": base, "gt_argument": args.gt})
     if args.method == "nose":
         result = nose_angle(rows)
+        result["gt_raw_angle"] = nose_gt_angle
+        result["validation_error"] = (abs(result["raw_angle"] - nose_gt_angle)
+                                      if nose_gt_angle is not None else None)
         save_json(work / "nose_result.json", result)
-        print(f'Raw mean: {result["raw_mean_degrees"]:.6f}°; |mean - 90°|: {result["deviation_from_90_after_mean"]:.6f}°')
+        print(f'Raw mean: {result["raw_angle"]:.6f}°; |mean - 90°|: {result["nose_deviation"]:.6f}°')
+        if nose_gt_angle is not None:
+            print(f'Raw GT: {nose_gt_angle:.6f}°; absolute error: {result["validation_error"]:.6f}°')
         return
     if frames is None or not frames.is_dir():
         parser.error("Blink/whisker needs --frames-dir with the landmark CSV, or --video")
