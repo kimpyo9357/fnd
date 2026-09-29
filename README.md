@@ -96,6 +96,13 @@ To supply a ground-truth grade, add `--gt` with `EX` or `E1`–`E5` for eyes, or
 ./docker.sh ./run_whisker.sh --video /source/top.mp4 --gt V5
 ```
 
+For nose validation, pass the manually measured raw angle in degrees as `--gt`.
+The prediction is the mean raw angle after frame and IQR filtering. `validation_error` is `abs(raw_angle - gt_raw_angle)`; without `--gt`, it is `null`.
+
+```bash
+./docker.sh ./run_nose.sh --video /source/top.mp4 --gt 89.5
+```
+
 ## Outputs
 
 Results go to `runs/<analysis>/<video filename>/`. To rerun the same video, pass `--output runs/new_name` with a fresh directory — preprocessing will not restart in a directory that already holds extracted frames.
@@ -103,7 +110,7 @@ Results go to `runs/<analysis>/<video filename>/`. To rerun the same video, pass
 | File | Contents |
 | --- | --- |
 | `processing_inference.csv` | Face detections and landmark coordinates |
-| `nose_result.json` | Nose angles for selected frames and their mean |
+| `nose_result.json` | Filtered raw nose angles, mean `raw_angle`, derived `nose_deviation`, and optional raw-angle GT error |
 | `blink_events.json` / `whisker_events.json` | Event intervals |
 | `dataset/frames/`, `dataset/test.json` | Event clips and metadata for the classifier |
 | `predictions.json` | Predicted grade for each clip |
