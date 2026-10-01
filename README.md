@@ -118,6 +118,13 @@ Results go to `runs/<analysis>/<video filename>/`. To rerun the same video, pass
 
 Eye and whisker analysis need detections and landmarks on consecutive frames. When no complete event interval is found, no grade prediction is produced.
 
+## Additional validation
+
+The separate [`validation/`](validation/README.md) folder reproduces the eye-state
+and other confidence-interval calculations. Its prepared test inputs are
+[downloaded separately from Google Drive](https://drive.google.com/file/d/1aIvjEN2CbzxYFWCtTTlAiFxKoBJBdISI/view?usp=sharing).
+Eye-state inference uses the existing `weights/eye_closure_resnet18.pth` weight.
+
 ## License
 
 Distributed under the **GNU Affero General Public License v3.0**; see [`LICENSE`](LICENSE). The AGPL applies because this project bundles YOLOv5, which Ultralytics releases under AGPL-3.0.

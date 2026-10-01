@@ -1,0 +1,59 @@
+{
+  "source": "results/longtail_predictions.csv",
+  "positive_class": "0=closed",
+  "n_frames": 4489,
+  "n_clusters": 2,
+  "cluster_column": "video_id",
+  "frames_per_cluster": {
+    "GOPR2036": 2056,
+    "GOPR2043": 2433
+  },
+  "confusion_counts": {
+    "tp": 756,
+    "fp": 182,
+    "fn": 100,
+    "tn": 3451
+  },
+  "metrics": {
+    "accuracy": 0.9371797727779015,
+    "precision": 0.8059701492537313,
+    "recall": 0.883177570093458,
+    "f1": 0.842809364548495
+  },
+  "wilson_frame_independence_assumption": {
+    "accuracy": [
+      0.9297011960960917,
+      0.9439107566012679
+    ],
+    "precision": [
+      0.7794360607131714,
+      0.8300083363499196
+    ],
+    "recall": [
+      0.8599278278755671,
+      0.9030035163512273
+    ]
+  },
+  "cluster_bootstrap_percentile_95_ci": {
+    "accuracy": [
+      0.9054665022605837,
+      0.9747081712062257
+    ],
+    "precision": [
+      0.8049052396878483,
+      0.8292682926829268
+    ],
+    "recall": [
+      0.43037974683544306,
+      0.9292149292149292
+    ],
+    "f1": [
+      0.5666666666666667,
+      0.8626045400238949
+    ]
+  },
+  "undefined_bootstrap_replicates": {},
+  "resamples": 2000,
+  "seed": 20261001,
+  "interpretation": "Wilson treats frames as independent and is descriptive only. Cluster intervals resample entire source groups; with very few groups they are exploratory. Conditional on the saved fixed model and test set; does not address training-set or animal leakage."
+}

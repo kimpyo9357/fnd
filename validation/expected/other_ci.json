@@ -1,0 +1,443 @@
+{
+  "resamples": 2000,
+  "seed": 20261001,
+  "blink": {
+    "source": "results_blink.json",
+    "video_details": [
+      {
+        "video_id": "GOPR2034",
+        "clips": 10,
+        "reference": 1,
+        "majority_candidates": [
+          1
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "GP012050",
+        "clips": 2,
+        "reference": 3,
+        "majority_candidates": [
+          4
+        ],
+        "exact": 0,
+        "within_one": 1
+      },
+      {
+        "video_id": "GP012046",
+        "clips": 17,
+        "reference": 2,
+        "majority_candidates": [
+          2
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "GOPR2049",
+        "clips": 12,
+        "reference": 3,
+        "majority_candidates": [
+          4
+        ],
+        "exact": 0,
+        "within_one": 1
+      },
+      {
+        "video_id": "GP011998",
+        "clips": 40,
+        "reference": 5,
+        "majority_candidates": [
+          5
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "GOPR2051",
+        "clips": 4,
+        "reference": 3,
+        "majority_candidates": [
+          1
+        ],
+        "exact": 0,
+        "within_one": 0
+      },
+      {
+        "video_id": "GOPR2046",
+        "clips": 5,
+        "reference": 2,
+        "majority_candidates": [
+          1
+        ],
+        "exact": 0,
+        "within_one": 1
+      },
+      {
+        "video_id": "GP012019",
+        "clips": 13,
+        "reference": 1,
+        "majority_candidates": [
+          1
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "GOPR2059",
+        "clips": 4,
+        "reference": 4,
+        "majority_candidates": [
+          4
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "S5_6W_Left_Crush_Injury_4W_FPS3_Restraint_230811",
+        "clips": 1,
+        "reference": 5,
+        "majority_candidates": [
+          5
+        ],
+        "exact": 1,
+        "within_one": 1
+      }
+    ],
+    "wilson_independent_video_assumption": {
+      "exact": {
+        "successes": 6,
+        "n": 10,
+        "estimate": 0.6,
+        "wilson_95_ci": [
+          0.31267376973365824,
+          0.8318196702937638
+        ]
+      },
+      "within_one": {
+        "successes": 9,
+        "n": 10,
+        "estimate": 0.9,
+        "wilson_95_ci": [
+          0.5958499732047615,
+          0.9821237869049271
+        ]
+      }
+    }
+  },
+  "whisker": {
+    "source": "results_whisker_backup.json",
+    "video_details": [
+      {
+        "video_id": "GX013414",
+        "clips": 97,
+        "reference": 0,
+        "majority_candidates": [
+          0
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "GX013394",
+        "clips": 45,
+        "reference": 1,
+        "majority_candidates": [
+          1
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "GX023386",
+        "clips": 32,
+        "reference": 4,
+        "majority_candidates": [
+          4
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "GX013427",
+        "clips": 101,
+        "reference": 3,
+        "majority_candidates": [
+          2
+        ],
+        "exact": 0,
+        "within_one": 1
+      },
+      {
+        "video_id": "GX013425",
+        "clips": 6,
+        "reference": 2,
+        "majority_candidates": [
+          2
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "GX013419",
+        "clips": 3,
+        "reference": 0,
+        "majority_candidates": [
+          0
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "GX013433",
+        "clips": 5,
+        "reference": 1,
+        "majority_candidates": [
+          0
+        ],
+        "exact": 0,
+        "within_one": 1
+      },
+      {
+        "video_id": "GX033384",
+        "clips": 2,
+        "reference": 4,
+        "majority_candidates": [
+          4
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "GX013395",
+        "clips": 7,
+        "reference": 1,
+        "majority_candidates": [
+          1
+        ],
+        "exact": 1,
+        "within_one": 1
+      },
+      {
+        "video_id": "GX013438",
+        "clips": 4,
+        "reference": 1,
+        "majority_candidates": [
+          1,
+          0
+        ],
+        "exact": null,
+        "within_one": 1
+      },
+      {
+        "video_id": "GX013447",
+        "clips": 1,
+        "reference": 3,
+        "majority_candidates": [
+          0
+        ],
+        "exact": 0,
+        "within_one": 0
+      }
+    ],
+    "wilson_independent_video_assumption": {
+      "exact": {
+        "status": "omitted: tie rule affects this metric"
+      },
+      "within_one": {
+        "successes": 10,
+        "n": 11,
+        "estimate": 0.9090909090909091,
+        "wilson_95_ci": [
+          0.6226415635484043,
+          0.9837678271141151
+        ]
+      }
+    }
+  },
+  "nose": {
+    "source": "nose_degree.xlsx",
+    "complete_pairs": 17,
+    "animals": {
+      "old animal": 5,
+      "rat 1": 4,
+      "rat 2": 4,
+      "rat 3": 4
+    },
+    "mae_degrees": 3.8529411764705883,
+    "mae_animal_cluster_bootstrap_95_ci": [
+      2.9444444444444446,
+      4.875
+    ],
+    "within_5_strict": {
+      "successes": 11,
+      "n": 17,
+      "estimate": 0.6470588235294118,
+      "wilson_independent_pair_95_ci": [
+        0.41300363485218694,
+        0.8269027960275627
+      ],
+      "animal_cluster_bootstrap_95_ci": [
+        0.5,
+        0.7777777777777778
+      ]
+    },
+    "pairs": [
+      {
+        "animal": "old animal",
+        "manual_cell": "D4",
+        "automated_cell": "M4",
+        "manual": 83.6,
+        "automated": 86,
+        "absolute_error": 2.4000000000000057,
+        "within_5_strict": 1
+      },
+      {
+        "animal": "old animal",
+        "manual_cell": "E4",
+        "automated_cell": "N4",
+        "manual": 86.1,
+        "automated": 89.5,
+        "absolute_error": 3.4000000000000057,
+        "within_5_strict": 1
+      },
+      {
+        "animal": "old animal",
+        "manual_cell": "F4",
+        "automated_cell": "O4",
+        "manual": 86.4,
+        "automated": 86,
+        "absolute_error": 0.4000000000000057,
+        "within_5_strict": 1
+      },
+      {
+        "animal": "old animal",
+        "manual_cell": "G4",
+        "automated_cell": "P4",
+        "manual": 80.3,
+        "automated": 88.8,
+        "absolute_error": 8.5,
+        "within_5_strict": 0
+      },
+      {
+        "animal": "old animal",
+        "manual_cell": "H4",
+        "automated_cell": "Q4",
+        "manual": 84,
+        "automated": 84.8,
+        "absolute_error": 0.7999999999999972,
+        "within_5_strict": 1
+      },
+      {
+        "animal": "rat 1",
+        "manual_cell": "D5",
+        "automated_cell": "M5",
+        "manual": 93.6,
+        "automated": 87.2,
+        "absolute_error": 6.3999999999999915,
+        "within_5_strict": 0
+      },
+      {
+        "animal": "rat 1",
+        "manual_cell": "E5",
+        "automated_cell": "N5",
+        "manual": 87.8,
+        "automated": 90.6,
+        "absolute_error": 2.799999999999997,
+        "within_5_strict": 1
+      },
+      {
+        "animal": "rat 1",
+        "manual_cell": "F5",
+        "automated_cell": "O5",
+        "manual": 90.1,
+        "automated": 90.3,
+        "absolute_error": 0.20000000000000284,
+        "within_5_strict": 1
+      },
+      {
+        "animal": "rat 1",
+        "manual_cell": "G5",
+        "automated_cell": "P5",
+        "manual": 89.1,
+        "automated": 87.5,
+        "absolute_error": 1.5999999999999943,
+        "within_5_strict": 1
+      },
+      {
+        "animal": "rat 2",
+        "manual_cell": "D6",
+        "automated_cell": "M6",
+        "manual": 86,
+        "automated": 86.4,
+        "absolute_error": 0.4000000000000057,
+        "within_5_strict": 1
+      },
+      {
+        "animal": "rat 2",
+        "manual_cell": "E6",
+        "automated_cell": "N6",
+        "manual": 87.2,
+        "automated": 88,
+        "absolute_error": 0.7999999999999972,
+        "within_5_strict": 1
+      },
+      {
+        "animal": "rat 2",
+        "manual_cell": "F6",
+        "automated_cell": "O6",
+        "manual": 86.7,
+        "automated": 102.5,
+        "absolute_error": 15.799999999999997,
+        "within_5_strict": 0
+      },
+      {
+        "animal": "rat 2",
+        "manual_cell": "G6",
+        "automated_cell": "P6",
+        "manual": 86.5,
+        "automated": 91.6,
+        "absolute_error": 5.099999999999994,
+        "within_5_strict": 0
+      },
+      {
+        "animal": "rat 3",
+        "manual_cell": "D7",
+        "automated_cell": "M7",
+        "manual": 87.9,
+        "automated": 82.4,
+        "absolute_error": 5.5,
+        "within_5_strict": 0
+      },
+      {
+        "animal": "rat 3",
+        "manual_cell": "E7",
+        "automated_cell": "N7",
+        "manual": 90.5,
+        "automated": 98,
+        "absolute_error": 7.5,
+        "within_5_strict": 0
+      },
+      {
+        "animal": "rat 3",
+        "manual_cell": "F7",
+        "automated_cell": "O7",
+        "manual": 89.3,
+        "automated": 92.5,
+        "absolute_error": 3.200000000000003,
+        "within_5_strict": 1
+      },
+      {
+        "animal": "rat 3",
+        "manual_cell": "G7",
+        "automated_cell": "P7",
+        "manual": 89.2,
+        "automated": 88.5,
+        "absolute_error": 0.7000000000000028,
+        "within_5_strict": 1
+      }
+    ],
+    "note": "Only four animals; cluster intervals are exploratory. Wilson assumes independent pairs."
+  }
+}
